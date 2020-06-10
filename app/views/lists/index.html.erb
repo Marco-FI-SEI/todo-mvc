@@ -1,11 +1,10 @@
 <section class="todoapp">
   <header class="header">
     <h1>Todo Lists</h1>
-    <%= form_with model: @list do |list_form| %>
-      <%= list_form.text_field :name, :class => "new-todo", :placeholder => "Create a new list", :autofocus => "" %>
-      <%= list_form.submit :style => "display: none" %>
+    <%= form_with model: @list, local: true do |list_form| %>
+      <%= list_form.text_field :name, class: "new-todo", placeholder: @list.errors.full_messages_for(:name).first || "Create new list", autofocus: "" %>
+      <%= list_form.submit style: "display: none" %>
     <% end %>
-    <%# <input class="new-todo"  autofocus=""> %>
   </header>
   <section class="main">
     <ul class="todo-list">
