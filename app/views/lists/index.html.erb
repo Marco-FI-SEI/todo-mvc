@@ -1,0 +1,22 @@
+<section class="todoapp">
+  <header class="header">
+    <h1>Todo Lists</h1>
+    <%= form_with model: @list do |list_form| %>
+      <%= list_form.text_field :name, :class => "new-todo", :placeholder => "Create a new list", :autofocus => "" %>
+      <%= list_form.submit :style => "display: none" %>
+    <% end %>
+    <%# <input class="new-todo"  autofocus=""> %>
+  </header>
+  <section class="main">
+    <ul class="todo-list">
+      <% @lists.each do |list| %>
+      <li>
+        <div>
+          <label><%= link_to list.name, list_path(list) %></label>
+        </div>
+      </li>
+      <% end %>
+    </ul>
+  </section>
+  <footer class="footer"></footer>
+</section>
