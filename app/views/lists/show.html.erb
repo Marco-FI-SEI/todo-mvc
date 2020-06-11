@@ -1,17 +1,20 @@
 <section class="todoapp">
   <header class="header">
     <h1><%= @list.name %></h1>
-   <%= form_with model: [@list, @item], local: true do |list_item_form| %>
-   <%= list_item_form.text_field :description, class: "new-todo", placeholder: @item.errors.full_messages_for(:description).first || "Add a new item", autofocus: "" %>
-      <%= list_item_form.submit style: "display: none" %>
-   <% end %>
+    <%= form_with model: [@list, @item], local: true do |list_item_form| %>
+      <%= list_item_form.text_field :description, class: "new-todo", placeholder: @item.errors.full_messages_for(:description).first || "Add a new item", autofocus: "" %>
+    <%= list_item_form.submit style: "display: none" %>
+    <% end %>
   </header>
   <section class="main">
     <ul class="todo-list">
       <% @list.items.each do |item| %>
-      <li>
-        <div>
-          <label><%= item.description %></label>
+      <li class="<%= "completed" if item.complete? %>">
+        <div class="view">
+          <%= form_with model: [@list, item], class: "item-status-form" do |item_status_form| %>
+            <%= item_status_form.check_box :status, id: "item_#{item.id}", class: "toggle", checked: (true if item.complete?) %>
+            <%= label_tag("item_#{item.id}", item.description) %>
+          <% end %>
         </div>
       </li>
       <% end %>
@@ -19,3 +22,5 @@
   </section>
   <footer class="footer"></footer>
 </section>
+
+<%# <input class="toggle" type="checkbox" value="1" name="item[1]" id="item_1"> %>

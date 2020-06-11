@@ -6,7 +6,8 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
-    @item = @list.items.build
+    # required for the form wrapper
+    @item = Item.new
   end
 
   def create
@@ -14,6 +15,7 @@ class ListsController < ApplicationController
     if @list.save
       redirect_to @list
     else
+      # required as form is rendered in index rather than new
       @lists = List.all
       render :index
     end

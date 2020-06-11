@@ -1,7 +1,7 @@
 <section class="todoapp">
   <header class="header">
     <h1>Todo Lists</h1>
-    <%= form_with model: @list, local: true do |list_form| %>
+    <%= form_with model: @list, local: true, class: "list-form" do |list_form| %>
       <%= list_form.text_field :name, class: "new-todo", placeholder: @list.errors.full_messages_for(:name).first || "Create new list", autofocus: "" %>
       <%= list_form.submit style: "display: none" %>
     <% end %>
@@ -11,7 +11,7 @@
       <% @lists.each do |list| %>
       <li>
         <div>
-          <label><%= link_to list.name, list_path(list) %></label>
+          <label><%= link_to list.name, list %></label>
         </div>
       </li>
       <% end %>
