@@ -17,5 +17,8 @@
       <% end %>
     </ul>
   </section>
-  <footer class="footer"></footer>
+  <footer class="footer">
+    <p>You're logged in as <%= current_user %></p>
+    <p class="info"><%= link_to "Logout", logout_path %></p>
+  </footer>
 </section>
